@@ -1,0 +1,35 @@
+{
+  "env": {
+    "node": true,
+    "browser": true,
+    "es6": true
+  },
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb",
+    "prettier",
+    "prettier/react",
+    "plugin:react/recommended"
+  ],
+  "rules": {
+    "react/prop-types": [0, { "forbid": [] }],
+    "react/destructuring-assignment": [0, { "forbid": [] }],
+    "react/prefer-stateless-function": [0, { "forbid": [] }],
+    "react/forbid-prop-types": [0, { "forbid": [] }],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [".js", ".jsx"]
+      }
+    ],
+    "prettier/prettier": [
+      "error",
+      {
+        "trailingComma": "es5",
+        "singleQuote": true,
+        "printWidth": 100
+      }
+    ]
+  },
+  "plugins": ["prettier", "react", "react-native", "jsx-a11y", "import"]
+}
