@@ -5,13 +5,13 @@ import { bindActionCreators } from 'redux';
 import { createStackNavigator } from 'react-navigation';
 import { Icon } from 'react-native-elements';
 
-import { getLaunches } from '../redux/launch';
-import FlightCard from './components/FlightCard';
+import { getRockets } from '../redux/rocket';
+import RocketCard from './components/RocketCard';
 
-export class HomeScreen extends Component {
+export class RocketScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Home',
-    drawerLabel: 'Home',
+    title: 'Rocket',
+    drawerLabel: 'Rocket',
     headerLeft: (
       <Icon
         color="#03A9F4"
@@ -24,11 +24,11 @@ export class HomeScreen extends Component {
   });
 
   componentDidMount() {
-    this.props.getLaunches();
+    this.props.getRockets();
   }
 
   onRefresh = () => {
-    this.props.getLaunches();
+    this.props.getRockets();
   };
 
   render() {
@@ -36,34 +36,33 @@ export class HomeScreen extends Component {
       <ScrollView
         style={{ flex: 1 }}
         refreshControl={
-          <RefreshControl refreshing={!!this.props.launch.loading} onRefresh={this.onRefresh} />
+          <RefreshControl refreshing={!!this.props.rocket.loading} onRefresh={this.onRefresh} />
         }
       >
-        {!!this.props.launch.launches.length &&
-          this.props.launch.launches.map(item => <FlightCard key={item.id} {...item} />)}
+        {!!this.props.rocket.rockets.length &&
+          this.props.rocket.rockets.map(item => <RocketCard key={item.id} {...item} />)}
       </ScrollView>
     );
   }
 }
-
-const mapStateToProps = ({ launch }) => ({
-  launch,
+const mapStateToProps = ({ rocket }) => ({
+  rocket,
 });
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
-      getLaunches,
+      getRockets,
     },
     dispatch
   );
 
-const HomeScreenNavigator = createStackNavigator(
+const RocketScreenNavigator = createStackNavigator(
   {
-    Home: connect(
+    Rocket: connect(
       mapStateToProps,
       mapDispatchToProps
-    )(HomeScreen),
+    )(RocketScreen),
   },
   {
     navigationOptions: {
@@ -78,4 +77,4 @@ const HomeScreenNavigator = createStackNavigator(
   }
 );
 
-export default HomeScreenNavigator;
+export default RocketScreenNavigator;

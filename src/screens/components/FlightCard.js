@@ -18,7 +18,7 @@ export default class FlightCard extends Component {
     let duration = moment.duration(diffTime * 1000, 'milliseconds');
     const interval = 1000;
 
-    setInterval(() => {
+    this.interval = setInterval(() => {
       duration = moment.duration(duration - interval, 'milliseconds');
       this.setState({
         days: duration.days(),
@@ -27,6 +27,10 @@ export default class FlightCard extends Component {
         seconds: duration.seconds(),
       });
     }, interval);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   render() {
