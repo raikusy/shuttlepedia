@@ -7,7 +7,7 @@ import { Icon } from 'react-native-elements';
 
 import { getLaunches } from '../redux/launch';
 import FlightCard from './components/FlightCard';
-import { primaryColor } from '../colors';
+import { primaryColor, white } from '../colors';
 
 export class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -69,9 +69,9 @@ const HomeScreenNavigator = createStackNavigator(
   {
     navigationOptions: {
       headerStyle: {
-        backgroundColor: 'white',
+        backgroundColor: white,
       },
-      headerTintColor: '#03A9F4',
+      headerTintColor: primaryColor,
       headerTitleStyle: {
         fontWeight: 'bold',
       },
