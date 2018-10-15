@@ -7,14 +7,15 @@ import { Icon } from 'react-native-elements';
 
 import { getArticles } from '../redux/article';
 import ArticleCard from './components/ArticleCard';
+import { primaryColor, white } from '../colors';
 
 export class ArticleScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Articles',
-    drawerLabel: 'Articles',
+    title: 'Space Articles',
+    drawerLabel: 'Space Articles',
     headerLeft: (
       <Icon
-        color="#03A9F4"
+        color={primaryColor}
         containerStyle={{ marginLeft: 10 }}
         onPress={() => navigation.openDrawer()}
         name="menu"
@@ -67,9 +68,9 @@ const ArticleScreenNavigator = createStackNavigator(
   {
     navigationOptions: {
       headerStyle: {
-        backgroundColor: 'white',
+        backgroundColor: white,
       },
-      headerTintColor: '#03A9F4',
+      headerTintColor: primaryColor,
       headerTitleStyle: {
         fontWeight: 'bold',
       },

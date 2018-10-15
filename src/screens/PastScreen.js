@@ -8,7 +8,7 @@ import moment from 'moment';
 
 import { getPastLaunches } from '../redux/past';
 import StatusBadge from './components/StatusBadge';
-import { primaryColor, yellow } from '../colors';
+import { primaryColor, yellow, white } from '../colors';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -19,7 +19,7 @@ export class PastScreen extends Component {
     drawerLabel: 'Past Launches',
     headerLeft: (
       <Icon
-        color="#03A9F4"
+        color={primaryColor}
         containerStyle={{ marginLeft: 10 }}
         onPress={() => navigation.openDrawer()}
         name="menu"
@@ -124,9 +124,9 @@ const PastScreenNavigator = createStackNavigator(
   {
     navigationOptions: {
       headerStyle: {
-        backgroundColor: 'white',
+        backgroundColor: white,
       },
-      headerTintColor: '#03A9F4',
+      headerTintColor: primaryColor,
       headerTitleStyle: {
         fontWeight: 'bold',
       },

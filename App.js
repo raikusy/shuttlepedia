@@ -14,31 +14,31 @@ const DrawerNavigator = createDrawerNavigator(
   {
     Home: {
       screen: HomeScreenNavigator,
-      navigationOptions: {
+      navigationOptions: () => ({
         title: 'Upcoming Launches',
         drawerIcon: <Icon name="home" type="octicon" />,
-      },
+      }),
     },
     Rocket: {
       screen: RocketScreenNavigator,
-      navigationOptions: {
+      navigationOptions: () => ({
         title: 'Shuttle Gallery',
         drawerIcon: <Icon name="rocket" type="simple-line-icon" />,
-      },
+      }),
     },
     Articles: {
       screen: ArticleScreenNavigator,
-      navigationOptions: {
+      navigationOptions: () => ({
         title: 'Space Articles',
         drawerIcon: <Icon name="book" type="octicon" />,
-      },
+      }),
     },
     Past: {
       screen: PastScreenNavigator,
-      navigationOptions: {
+      navigationOptions: () => ({
         title: 'Past Launches',
         drawerIcon: <Icon name="flame" type="octicon" />,
-      },
+      }),
     },
   },
   {

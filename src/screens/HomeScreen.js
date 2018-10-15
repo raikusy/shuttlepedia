@@ -7,14 +7,15 @@ import { Icon } from 'react-native-elements';
 
 import { getLaunches } from '../redux/launch';
 import FlightCard from './components/FlightCard';
+import { primaryColor } from '../colors';
 
 export class HomeScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Home',
-    drawerLabel: 'Home',
+    title: 'Upcoming Launches',
+    drawerIcon: <Icon name="rocket" type="simple-line-icon" />,
     headerLeft: (
       <Icon
-        color="#03A9F4"
+        color={primaryColor}
         containerStyle={{ marginLeft: 10 }}
         onPress={() => navigation.openDrawer()}
         name="menu"

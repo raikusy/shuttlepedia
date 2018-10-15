@@ -7,14 +7,15 @@ import { Icon } from 'react-native-elements';
 
 import { getRockets } from '../redux/rocket';
 import RocketCard from './components/RocketCard';
+import { primaryColor, white } from '../colors';
 
 export class RocketScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Rocket List',
-    drawerLabel: 'Rocket List',
+    title: 'Shuttle Gallery',
+    drawerLabel: 'Shuttle Gallery',
     headerLeft: (
       <Icon
-        color="#03A9F4"
+        color={primaryColor}
         containerStyle={{ marginLeft: 10 }}
         onPress={() => navigation.openDrawer()}
         name="menu"
@@ -67,9 +68,9 @@ const RocketScreenNavigator = createStackNavigator(
   {
     navigationOptions: {
       headerStyle: {
-        backgroundColor: 'white',
+        backgroundColor: white,
       },
-      headerTintColor: '#03A9F4',
+      headerTintColor: primaryColor,
       headerTitleStyle: {
         fontWeight: 'bold',
       },
