@@ -36,7 +36,7 @@ export default (state = initialState, action) => {
 
 export const getLaunches = () => dispatch => {
   dispatch({ type: GET_NEXT_LAUNCH_REQUEST });
-  const url = `https://launchlibrary.net/1.4/launch/next/5`;
+  const url = `https://launchlibrary.net/1.4/launch/next/5?status=1`;
   fetch(url, {
     method: 'GET',
   })

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
-import { Card, Button } from 'react-native-elements';
+import { View, Text } from 'react-native';
+import { Card, Button, Badge } from 'react-native-elements';
 import moment from 'moment';
+
+import { success } from '../../colors';
 
 export default class FlightCard extends Component {
   state = {
@@ -37,19 +39,36 @@ export default class FlightCard extends Component {
     const { name, rocket, missions } = this.props;
     const { days, hours, minutes, seconds } = this.state;
     return (
-      <Card title={name} image={{ uri: rocket.imageURL }}>
-        <Text style={{ marginBottom: 10 }}>{missions[0].description}</Text>
-        <Text style={{ marginBottom: 10, textAlign: 'center' }}>Launching in...</Text>
+      <Card image={{ uri: rocket.imageURL }} containerStyle={{ borderRadius: 5 }}>
+        <Text style={{ marginBottom: 10, fontSize: 24 }}>{name}</Text>
+        <Text style={{ marginBottom: 10 }}>{!!missions.length && missions[0].description}</Text>
+        <View
+          style={{
+            flex: 1,
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Badge
+            containerStyle={{
+              backgroundColor: success,
+              padding: 10,
+              width: 150,
+            }}
+          >
+            <Text>Launching in..</Text>
+          </Badge>
+        </View>
         <Text style={{ marginBottom: 10, fontSize: 24, textAlign: 'center' }}>
-          <Text>{!!days && `${days} days, `}</Text>
-          <Text>{`${hours} hours, `}</Text>
-          <Text>{`${minutes} minutes, `}</Text>
-          <Text>{`${seconds} seconds`}</Text>
+          <Text>{!!days && `${days}d : `}</Text>
+          <Text>{`${hours}h : `}</Text>
+          <Text>{`${minutes}m : `}</Text>
+          <Text>{`${seconds}s`}</Text>
         </Text>
         <Button
-          icon={{ name: 'code' }}
+          icon={{ name: 'rocket', type: 'font-awesome' }}
           backgroundColor="#03A9F4"
-          buttonStyle={{ borderRadius: 0, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
+          buttonStyle={{ borderRadius: 10, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
           title="VIEW DETAILS"
         />
       </Card>
