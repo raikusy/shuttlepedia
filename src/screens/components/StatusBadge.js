@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Badge, Text } from 'react-native-elements';
 
-import { success, danger, yellow, white, black } from '../../colors';
+import { success, danger, yellow, white } from '../../colors';
 
 export default class DiscountBadge extends Component {
   render() {
@@ -29,7 +29,7 @@ export default class DiscountBadge extends Component {
     }
     return (
       <Badge containerStyle={{ backgroundColor: danger }}>
-        <Text style={{ fontSize: 12, fontWeight: 'bold', color: black }}>Failed</Text>
+        <Text style={{ fontSize: 12, fontWeight: 'bold', color: white }}>Failed</Text>
       </Badge>
     );
   }

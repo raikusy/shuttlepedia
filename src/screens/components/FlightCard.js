@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import { Card, Button, Badge } from 'react-native-elements';
 import moment from 'moment';
 
-import { success } from '../../colors';
+import { success, white } from '../../colors';
 
 export default class FlightCard extends Component {
   state = {
@@ -52,14 +52,14 @@ export default class FlightCard extends Component {
           <Badge
             containerStyle={{
               backgroundColor: success,
-              padding: 10,
-              width: 150,
+              borderRadius: 5,
+              marginBottom: 10,
             }}
           >
-            <Text>Launching in..</Text>
+            <Text style={{ padding: 5, fontSize: 18, color: white }}>Launching in..</Text>
           </Badge>
         </View>
-        <Text style={{ marginBottom: 10, fontSize: 24, textAlign: 'center' }}>
+        <Text style={{ marginBottom: 10, fontSize: 26, textAlign: 'center' }}>
           <Text>{!!days && `${days}d : `}</Text>
           <Text>{`${hours}h : `}</Text>
           <Text>{`${minutes}m : `}</Text>

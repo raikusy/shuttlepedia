@@ -10,8 +10,8 @@ import RocketCard from './components/RocketCard';
 
 export class RocketScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Rocket',
-    drawerLabel: 'Rocket',
+    title: 'Rocket List',
+    drawerLabel: 'Rocket List',
     headerLeft: (
       <Icon
         color="#03A9F4"

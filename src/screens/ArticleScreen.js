@@ -10,8 +10,8 @@ import ArticleCard from './components/ArticleCard';
 
 export class ArticleScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    title: 'Article',
-    drawerLabel: 'Article',
+    title: 'Articles',
+    drawerLabel: 'Articles',
     headerLeft: (
       <Icon
         color="#03A9F4"
