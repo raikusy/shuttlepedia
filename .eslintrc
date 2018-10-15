@@ -12,6 +12,8 @@
     "plugin:react/recommended"
   ],
   "rules": {
+    "no-underscore-dangle": 0,
+    "camelcase": 0,
     "react/prop-types": [0, { "forbid": [] }],
     "react/destructuring-assignment": [0, { "forbid": [] }],
     "react/prefer-stateless-function": [0, { "forbid": [] }],

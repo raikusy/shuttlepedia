@@ -6,14 +6,16 @@ import store from './src/store';
 import Sidebar from './src/screens/components/Sidebar';
 import HomeScreenNavigator from './src/screens/HomeScreen';
 import RocketScreenNavigator from './src/screens/RocketScreen';
+import ArticleScreenNavigator from './src/screens/ArticleScreen';
 
 const DrawerNavigator = createDrawerNavigator(
   {
     Home: HomeScreenNavigator,
     Rocket: RocketScreenNavigator,
+    Article: ArticleScreenNavigator,
   },
   {
-  contentComponent: props => <Sidebar {...props} />, //eslint-disable-line
+    contentComponent: props => <Sidebar {...props} />, //eslint-disable-line
   }
 );
 
