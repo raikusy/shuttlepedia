@@ -7,12 +7,14 @@ import Sidebar from './src/screens/components/Sidebar';
 import HomeScreenNavigator from './src/screens/HomeScreen';
 import RocketScreenNavigator from './src/screens/RocketScreen';
 import ArticleScreenNavigator from './src/screens/ArticleScreen';
+import PastScreenNavigator from './src/screens/PastScreen';
 
 const DrawerNavigator = createDrawerNavigator(
   {
     Home: HomeScreenNavigator,
     Rocket: RocketScreenNavigator,
     Article: ArticleScreenNavigator,
+    Past: PastScreenNavigator,
   },
   {
     contentComponent: props => <Sidebar {...props} />, //eslint-disable-line

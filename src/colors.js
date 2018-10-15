@@ -1,0 +1,9 @@
+export const primaryColor = '#2196f3';
+export const primaryDark = '#4A90E2';
+export const success = '#2ECC71';
+export const danger = '#EC644B';
+export const white = '#ffffff';
+export const yellow = '#e9d460';
+export const gray = '#E9EBEE';
+export const darkGray = '#6c7a89';
+export const black = '#2e3131';
