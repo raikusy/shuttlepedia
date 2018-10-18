@@ -59,7 +59,7 @@ export class PastScreen extends Component {
       >
         <View style={{ width: SCREEN_WIDTH / 2, alignSelf: 'flex-start', marginLeft: 10 }}>
           <Text style={{ color: 'black', fontSize: 16, fontWeight: 'bold' }}>{item.name}</Text>
-          <Text>{moment(`${item.net}`).fromNow()}</Text>
+          <Text>{moment(item.net).format('MMMM Do YYYY')}</Text>
         </View>
         <View style={{ marginLeft: 'auto' }}>
           <StatusBadge status={item.status} />
