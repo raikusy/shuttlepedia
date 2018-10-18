@@ -7,10 +7,11 @@ import { primaryColor } from '../../colors';
 export default class RocketCard extends Component {
   render() {
     const { name, configuration, imageURL, family } = this.props;
+    const image = imageURL && imageURL.replace('1920', '320');
     return (
       <Card>
         <View style={{ flexDirection: 'row' }}>
-          <Avatar large rounded source={{ uri: imageURL }} activeOpacity={0.7} />
+          <Avatar large rounded source={{ uri: image }} activeOpacity={0.7} />
           <View style={{ marginLeft: 10 }}>
             <Text style={{ marginBottom: 10, fontSize: 20 }}>{name}</Text>
             <Text style={{ marginBottom: 10 }}>Configuration: {configuration}</Text>
