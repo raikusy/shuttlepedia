@@ -36,7 +36,7 @@ export default class FlightCard extends Component {
   }
 
   render() {
-    const { name, rocket, missions } = this.props;
+    const { name, rocket, missions, id } = this.props;
     const { days, hours, minutes, seconds } = this.state;
     return (
       <Card image={{ uri: rocket.imageURL }} containerStyle={{ borderRadius: 5 }}>
@@ -70,6 +70,7 @@ export default class FlightCard extends Component {
           backgroundColor="#03A9F4"
           buttonStyle={{ borderRadius: 10, marginLeft: 0, marginRight: 0, marginBottom: 0 }}
           title="VIEW DETAILS"
+          onPress={() => this.props.navigation.navigate('Details', { id })}
         />
       </Card>
     );

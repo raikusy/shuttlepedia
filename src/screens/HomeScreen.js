@@ -7,6 +7,7 @@ import { Icon } from 'react-native-elements';
 
 import { getLaunches } from '../redux/launch';
 import FlightCard from './components/FlightCard';
+import LaunchDetails from './HomeScreen/LaunchDetails';
 import { primaryColor, white } from '../colors';
 
 export class HomeScreen extends Component {
@@ -41,7 +42,9 @@ export class HomeScreen extends Component {
         }
       >
         {!!this.props.launch.launches.length &&
-          this.props.launch.launches.map(item => <FlightCard key={item.id} {...item} />)}
+          this.props.launch.launches.map(item => (
+            <FlightCard navigation={this.props.navigation} key={item.id} {...item} />
+          ))}
       </ScrollView>
     );
   }
@@ -65,6 +68,7 @@ const HomeScreenNavigator = createStackNavigator(
       mapStateToProps,
       mapDispatchToProps
     )(HomeScreen),
+    Details: LaunchDetails,
   },
   {
     navigationOptions: {
