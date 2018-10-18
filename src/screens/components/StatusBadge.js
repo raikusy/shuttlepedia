@@ -9,7 +9,7 @@ export default class DiscountBadge extends Component {
     if (status === 1) {
       return (
         <Badge containerStyle={{ backgroundColor: success }}>
-          <Text style={{ fontSize: 12, fontWeight: 'bold', color: white }}>Ready</Text>
+          <Text style={{ fontSize: 12, fontWeight: 'bold', color: white }}>Ready to launch</Text>
         </Badge>
       );
     }

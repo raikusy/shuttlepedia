@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { FlatList, View, RefreshControl, Dimensions, ActivityIndicator } from 'react-native';
+import {
+  FlatList,
+  View,
+  RefreshControl,
+  Dimensions,
+  ActivityIndicator,
+  TouchableNativeFeedback,
+} from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStackNavigator } from 'react-navigation';
@@ -9,6 +16,7 @@ import moment from 'moment';
 import { getPastLaunches } from '../redux/past';
 import StatusBadge from './components/StatusBadge';
 import { primaryColor, yellow, white } from '../colors';
+import LaunchDetails from './HomeScreen/LaunchDetails';
 
 const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -37,23 +45,27 @@ export class PastScreen extends Component {
   };
 
   renderItem = ({ item }) => (
-    <View
-      style={{
-        flexDirection: 'row',
-        padding: 10,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        backgroundColor: 'white',
-      }}
+    <TouchableNativeFeedback
+      onPress={() => this.props.navigation.navigate('Details', { id: item.id })}
     >
-      <View style={{ width: SCREEN_WIDTH / 2, alignSelf: 'flex-start', marginLeft: 10 }}>
-        <Text style={{ color: 'black', fontSize: 16, fontWeight: 'bold' }}>{item.name}</Text>
-        <Text>{moment(`${item.net}`).fromNow()}</Text>
+      <View
+        style={{
+          flexDirection: 'row',
+          padding: 10,
+          justifyContent: 'flex-start',
+          alignItems: 'center',
+          backgroundColor: 'white',
+        }}
+      >
+        <View style={{ width: SCREEN_WIDTH / 2, alignSelf: 'flex-start', marginLeft: 10 }}>
+          <Text style={{ color: 'black', fontSize: 16, fontWeight: 'bold' }}>{item.name}</Text>
+          <Text>{moment(`${item.net}`).fromNow()}</Text>
+        </View>
+        <View style={{ marginLeft: 'auto' }}>
+          <StatusBadge status={item.status} />
+        </View>
       </View>
-      <View style={{ marginLeft: 'auto' }}>
-        <StatusBadge status={item.status} />
-      </View>
-    </View>
+    </TouchableNativeFeedback>
   );
 
   onRefresh = () => {
@@ -120,6 +132,7 @@ const PastScreenNavigator = createStackNavigator(
       mapStateToProps,
       mapDispatchToProps
     )(PastScreen),
+    Details: LaunchDetails,
   },
   {
     navigationOptions: {

@@ -1,5 +1,13 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, RefreshControl, View, Image, Linking } from 'react-native';
+import {
+  ScrollView,
+  Text,
+  RefreshControl,
+  View,
+  Image,
+  Linking,
+  ActivityIndicator,
+} from 'react-native';
 import { Badge, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -7,6 +15,8 @@ import moment from 'moment';
 
 import { getSingleLaunch } from '../../redux/singleLaunch';
 import { white, success, black, primaryColor, danger } from '../../colors';
+import TimeCounter from '../components/TimeCounter';
+import StatusBadge from '../components/StatusBadge';
 
 class LaunchDetails extends Component {
   static navigationOptions = () => ({
@@ -74,8 +84,18 @@ class LaunchDetails extends Component {
 
   render() {
     const { singleLaunch } = this.props;
-    const { name, rocket, missions, vidURLs } = this.props.singleLaunch.data;
-    const { days, hours, minutes, seconds } = this.state;
+    const { name, rocket, missions, vidURLs, status } = this.props.singleLaunch.data;
+
+    if (singleLaunch.loading) {
+      return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+          <ActivityIndicator />
+          <Badge containerStyle={{ backgroundColor: success, marginTop: 20 }}>
+            <Text style={{ fontSize: 12, fontWeight: 'bold', color: white }}>Loading</Text>
+          </Badge>
+        </View>
+      );
+    }
     return (
       <ScrollView
         refreshControl={
@@ -87,48 +107,25 @@ class LaunchDetails extends Component {
           rocket.imageURL && <Image style={{ height: 200 }} source={{ uri: rocket.imageURL }} />}
         <View style={{ padding: 10 }}>
           <Text style={{ marginBottom: 10, fontSize: 24, textAlign: 'center' }}>{name}</Text>
+          <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+            <StatusBadge status={status} />
+          </View>
+          {status === 1 && <TimeCounter {...this.state} />}
           <View
             style={{
-              flex: 1,
+              flexDirection: 'row',
               alignItems: 'center',
               justifyContent: 'center',
               marginVertical: 10,
+              flexWrap: 'wrap',
             }}
           >
-            <Badge
-              containerStyle={{
-                backgroundColor: success,
-                borderRadius: 5,
-              }}
-            >
-              <Text style={{ padding: 5, fontSize: 18, color: white }}>Launching in..</Text>
-            </Badge>
-          </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
-            <View style={{ marginHorizontal: 5 }}>
-              <Text style={{ fontSize: 46, textAlign: 'center' }}>{days}:</Text>
-              <Text style={{ textAlign: 'center' }}>Days</Text>
-            </View>
-            <View style={{ marginHorizontal: 5 }}>
-              <Text style={{ fontSize: 46, textAlign: 'center' }}>{hours}:</Text>
-              <Text style={{ textAlign: 'center' }}>Hours</Text>
-            </View>
-            <View style={{ marginHorizontal: 5 }}>
-              <Text style={{ fontSize: 46, textAlign: 'center' }}>{minutes}:</Text>
-              <Text style={{ textAlign: 'center' }}>Minutes</Text>
-            </View>
-            <View style={{ marginHorizontal: 5 }}>
-              <Text style={{ fontSize: 46, textAlign: 'center' }}>{seconds}</Text>
-              <Text style={{ textAlign: 'center' }}>Seconds</Text>
-            </View>
-          </View>
-          <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }}>
             {vidURLs &&
               vidURLs.map(item => (
                 <Button
                   key={item}
                   icon={{ name: 'live-tv', type: 'material', color: danger }}
-                  title="Live"
+                  title={status === 1 ? 'LIVE' : 'VIDEO'}
                   buttonStyle={{
                     backgroundColor: white,
                     borderColor: danger,
