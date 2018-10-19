@@ -10,8 +10,9 @@ import {
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStackNavigator } from 'react-navigation';
-import { Badge, Text, Icon } from 'react-native-elements';
+import { Badge, Text, Icon, SearchBar } from 'react-native-elements';
 import moment from 'moment';
+import _ from 'lodash';
 
 import { getPastLaunches, loadMore } from '../redux/past';
 import StatusBadge from './components/StatusBadge';
@@ -38,10 +39,29 @@ export class PastScreen extends Component {
 
   state = {
     page: 0,
+    value: '',
+    results: [],
   };
 
   componentDidMount() {
     this.props.getPastLaunches();
+  }
+
+  // static getDerivedStateFromProps(props, state) {
+  //   if (props.past.launches !== state.results) {
+  //     return {
+  //       results: props.past.launches,
+  //     };
+  //   }
+
+  //   // Return null if the state hasn't changed
+  //   return null;
+  // }
+
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.past.launches !== this.props.past.launches) {
+      this.setState({ results: nextProps.past.launches });
+    }
   }
 
   loadMore = () => {
@@ -83,9 +103,28 @@ export class PastScreen extends Component {
     this.props.getPastLaunches();
   };
 
+  resetComponent = () => this.setState({ results: this.props.past.launches, value: '' });
+
+  searchFilterFunction = value => {
+    const newData = _.filter(this.props.past.launches, item =>
+      item.name.toLowerCase().includes(value.toLowerCase())
+    );
+    this.setState({
+      value,
+      results: newData,
+    });
+  };
+
   render() {
     return (
       <View style={{ flex: 1 }}>
+        <SearchBar
+          lightTheme
+          round
+          onChangeText={text => this.searchFilterFunction(text)}
+          onClearText={this.resetComponent}
+          placeholder="Search Launches"
+        />
         <FlatList
           refreshControl={
             <RefreshControl refreshing={!!this.props.past.loading} onRefresh={this.onRefresh} />
@@ -111,7 +150,8 @@ export class PastScreen extends Component {
               </View>
             )
           }
-          data={this.props.past.launches}
+          data={this.state.results}
+          extraData={this.state.value}
           renderItem={this.renderItem}
           keyExtractor={item => `${item.id}`}
           initialNumToRender={15}
