@@ -6,7 +6,7 @@ import { primaryColor } from '../../colors';
 
 export default class RocketCard extends Component {
   render() {
-    const { name, configuration, imageURL, family } = this.props;
+    const { id, name, configuration, imageURL, family } = this.props;
     const image = imageURL && imageURL.replace('1920', '320');
     return (
       <Card>
@@ -32,6 +32,7 @@ export default class RocketCard extends Component {
             marginLeft: 'auto',
           }}
           textStyle={{ color: primaryColor }}
+          onPress={() => this.props.navigation.navigate('Details', { id })}
         />
       </Card>
     );

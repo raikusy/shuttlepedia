@@ -5,6 +5,7 @@ import rocket from './rocket';
 import article from './article';
 import past from './past';
 import singleLaunch from './singleLaunch';
+import singleRocket from './singleRocket';
 
 export default combineReducers({
   launch,
@@ -12,4 +13,5 @@ export default combineReducers({
   article,
   past,
   singleLaunch,
+  singleRocket,
 });

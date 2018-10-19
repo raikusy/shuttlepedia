@@ -8,6 +8,7 @@ import { Icon } from 'react-native-elements';
 import { getRockets } from '../redux/rocket';
 import RocketCard from './components/RocketCard';
 import { primaryColor, white } from '../colors';
+import RocketDetails from './RocketScreen/RocketDetails';
 
 export class RocketScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
@@ -41,7 +42,9 @@ export class RocketScreen extends Component {
         }
       >
         {!!this.props.rocket.rockets.length &&
-          this.props.rocket.rockets.map(item => <RocketCard key={item.id} {...item} />)}
+          this.props.rocket.rockets.map(item => (
+            <RocketCard navigation={this.props.navigation} key={item.id} {...item} />
+          ))}
       </ScrollView>
     );
   }
@@ -64,6 +67,7 @@ const RocketScreenNavigator = createStackNavigator(
       mapStateToProps,
       mapDispatchToProps
     )(RocketScreen),
+    Details: RocketDetails,
   },
   {
     navigationOptions: {
