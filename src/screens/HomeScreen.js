@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, RefreshControl } from 'react-native';
+import { View, FlatList, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStackNavigator } from 'react-navigation';
@@ -35,17 +35,18 @@ export class HomeScreen extends Component {
 
   render() {
     return (
-      <ScrollView
-        style={{ flex: 1 }}
-        refreshControl={
-          <RefreshControl refreshing={!!this.props.launch.loading} onRefresh={this.onRefresh} />
-        }
-      >
-        {!!this.props.launch.launches.length &&
-          this.props.launch.launches.map(item => (
+      <View style={{ flex: 1 }}>
+        <FlatList
+          refreshControl={
+            <RefreshControl refreshing={!!this.props.launch.loading} onRefresh={this.onRefresh} />
+          }
+          renderItem={({ item }) => (
             <FlightCard navigation={this.props.navigation} key={item.id} {...item} />
-          ))}
-      </ScrollView>
+          )}
+          data={this.props.launch.launches}
+          keyExtractor={item => `${item.id}`}
+        />
+      </View>
     );
   }
 }

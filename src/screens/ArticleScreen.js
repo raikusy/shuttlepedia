@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, RefreshControl } from 'react-native';
+import { View, RefreshControl, FlatList } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStackNavigator } from 'react-navigation';
@@ -34,15 +34,16 @@ export class ArticleScreen extends Component {
 
   render() {
     return (
-      <ScrollView
-        style={{ flex: 1 }}
-        refreshControl={
-          <RefreshControl refreshing={!!this.props.article.loading} onRefresh={this.onRefresh} />
-        }
-      >
-        {!!this.props.article.articles.length &&
-          this.props.article.articles.map(item => <ArticleCard key={item._id} {...item} />)}
-      </ScrollView>
+      <View style={{ flex: 1 }}>
+        <FlatList
+          refreshControl={
+            <RefreshControl refreshing={!!this.props.article.loading} onRefresh={this.onRefresh} />
+          }
+          renderItem={({ item }) => <ArticleCard key={item._id} {...item} />}
+          data={this.props.article.articles}
+          keyExtractor={item => `${item.id}`}
+        />
+      </View>
     );
   }
 }

@@ -89,7 +89,7 @@ export class PastScreen extends Component {
               <Badge
                 containerStyle={{ backgroundColor: yellow, marginTop: SCREEN_HEIGHT / 2 - 100 }}
               >
-                <Text>No Past History</Text>
+                <Text>{this.props.past.loading ? 'Loading..' : 'No Past History'}</Text>
               </Badge>
             </View>
           }

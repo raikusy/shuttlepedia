@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, RefreshControl } from 'react-native';
+import { View, FlatList, RefreshControl } from 'react-native';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { createStackNavigator } from 'react-navigation';
@@ -35,17 +35,18 @@ export class RocketScreen extends Component {
 
   render() {
     return (
-      <ScrollView
-        style={{ flex: 1 }}
-        refreshControl={
-          <RefreshControl refreshing={!!this.props.rocket.loading} onRefresh={this.onRefresh} />
-        }
-      >
-        {!!this.props.rocket.rockets.length &&
-          this.props.rocket.rockets.map(item => (
+      <View style={{ flex: 1 }}>
+        <FlatList
+          refreshControl={
+            <RefreshControl refreshing={!!this.props.rocket.loading} onRefresh={this.onRefresh} />
+          }
+          renderItem={({ item }) => (
             <RocketCard navigation={this.props.navigation} key={item.id} {...item} />
-          ))}
-      </ScrollView>
+          )}
+          data={this.props.rocket.rockets}
+          keyExtractor={item => `${item.id}`}
+        />
+      </View>
     );
   }
 }
