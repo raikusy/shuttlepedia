@@ -7,6 +7,7 @@ import {
   Image,
   Linking,
   ActivityIndicator,
+  TouchableNativeFeedback,
 } from 'react-native';
 import { Badge, Button } from 'react-native-elements';
 import { connect } from 'react-redux';
@@ -28,6 +29,7 @@ class LaunchDetails extends Component {
     hours: '',
     minutes: '',
     seconds: '',
+    imageHeight: 200,
   };
 
   componentDidMount() {
@@ -82,9 +84,25 @@ class LaunchDetails extends Component {
     this.props.getSingleLaunch(id);
   };
 
+  imageHeight = () => {
+    if (this.state.imageHeight === 200) {
+      this.setState({ imageHeight: 600 });
+    } else {
+      this.setState({ imageHeight: 200 });
+    }
+  };
+
   render() {
     const { singleLaunch } = this.props;
-    const { name, rocket, missions, vidURLs, status } = this.props.singleLaunch.data;
+    const {
+      name,
+      rocket,
+      missions,
+      vidURLs,
+      status,
+      failreason,
+      location,
+    } = this.props.singleLaunch.data;
 
     if (singleLaunch.loading) {
       return (
@@ -104,13 +122,39 @@ class LaunchDetails extends Component {
         style={{ backgroundColor: white }}
       >
         {rocket &&
-          rocket.imageURL && <Image style={{ height: 200 }} source={{ uri: rocket.imageURL }} />}
+          rocket.imageURL && (
+            <TouchableNativeFeedback useForground onPress={this.imageHeight}>
+              <Image style={{ height: this.state.imageHeight }} source={{ uri: rocket.imageURL }} />
+            </TouchableNativeFeedback>
+          )}
         <View style={{ padding: 10 }}>
           <Text style={{ marginBottom: 10, fontSize: 24, textAlign: 'center' }}>{name}</Text>
           <View style={{ justifyContent: 'center', alignItems: 'center' }}>
             <StatusBadge status={status} />
           </View>
           {status === 1 && <TimeCounter {...this.state} />}
+          {status === 4 && (
+            <View>
+              <View
+                style={{
+                  flex: 1,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  marginVertical: 10,
+                }}
+              >
+                <Badge
+                  containerStyle={{
+                    backgroundColor: danger,
+                    borderRadius: 5,
+                  }}
+                >
+                  <Text style={{ padding: 5, fontSize: 18, color: white }}>Fail Reason</Text>
+                </Badge>
+              </View>
+              <Text>{failreason}</Text>
+            </View>
+          )}
           <View
             style={{
               flexDirection: 'row',
@@ -153,7 +197,7 @@ class LaunchDetails extends Component {
           >
             <Badge
               containerStyle={{
-                backgroundColor: success,
+                backgroundColor: primaryColor,
                 borderRadius: 5,
               }}
             >
@@ -179,7 +223,7 @@ class LaunchDetails extends Component {
           >
             <Badge
               containerStyle={{
-                backgroundColor: success,
+                backgroundColor: primaryColor,
                 borderRadius: 5,
               }}
             >
@@ -230,6 +274,44 @@ class LaunchDetails extends Component {
                 }}
               />
             </View>
+          </View>
+          <View
+            style={{
+              flex: 1,
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginVertical: 10,
+            }}
+          >
+            <Badge
+              containerStyle={{
+                backgroundColor: primaryColor,
+                borderRadius: 5,
+              }}
+            >
+              <Text style={{ padding: 5, fontSize: 18, color: white }}>Location</Text>
+            </Badge>
+          </View>
+          <View>
+            <Text>{location && location.name}</Text>
+            <Button
+              icon={{ name: 'map-marker', type: 'font-awesome', color: primaryColor }}
+              title="Open in Google Maps"
+              buttonStyle={{
+                backgroundColor: white,
+                borderColor: primaryColor,
+                borderWidth: 0,
+                borderRadius: 5,
+                padding: 5,
+              }}
+              containerViewStyle={{
+                marginLeft: 0,
+              }}
+              textStyle={{ color: primaryColor }}
+              onPress={() => {
+                Linking.openURL(location.pads[0].mapURL);
+              }}
+            />
           </View>
         </View>
       </ScrollView>

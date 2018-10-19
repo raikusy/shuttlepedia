@@ -13,7 +13,7 @@ import { createStackNavigator } from 'react-navigation';
 import { Badge, Text, Icon } from 'react-native-elements';
 import moment from 'moment';
 
-import { getPastLaunches } from '../redux/past';
+import { getPastLaunches, loadMore } from '../redux/past';
 import StatusBadge from './components/StatusBadge';
 import { primaryColor, yellow, white } from '../colors';
 import LaunchDetails from './HomeScreen/LaunchDetails';
@@ -36,12 +36,23 @@ export class PastScreen extends Component {
     ),
   });
 
+  state = {
+    page: 0,
+  };
+
   componentDidMount() {
     this.props.getPastLaunches();
   }
 
   loadMore = () => {
-    this.props.getPastLaunches();
+    this.setState(
+      state => ({
+        page: state.page + 1,
+      }),
+      () => {
+        this.props.loadMore(this.state.page + 1);
+      }
+    );
   };
 
   renderItem = ({ item }) => (
@@ -105,9 +116,9 @@ export class PastScreen extends Component {
           keyExtractor={item => `${item.id}`}
           initialNumToRender={15}
           onEndReachedThreshold={0.5}
-          onEndReached={() => {
-            this.loadMore();
-          }}
+          // onEndReached={() => {
+          //   this.loadMore();
+          // }}
         />
       </View>
     );
@@ -122,6 +133,7 @@ const mapDispatchToProps = dispatch =>
   bindActionCreators(
     {
       getPastLaunches,
+      loadMore,
     },
     dispatch
   );
