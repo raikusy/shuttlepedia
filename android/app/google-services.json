@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "309631354322",
+    "firebase_url": "https://shuttlepedia.firebaseio.com",
+    "project_id": "shuttlepedia",
+    "storage_bucket": "shuttlepedia.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:309631354322:android:44a1af959748642f",
+        "android_client_info": {
+          "package_name": "com.shuttlepedia"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "309631354322-92rm9160fge4vrj2rnqgs9lo1kem59m6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBH73wJOUDW1kBW2_J-2dk0sLv6mMIkxj8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
